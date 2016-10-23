@@ -5,4 +5,9 @@ package yellow5a5.clearscreenhelper;
  */
 
 public class Constants {
+
+    enum Orientation{
+        LEFT,RIGHT,TOP,BOTTOM;
+    }
+
 }

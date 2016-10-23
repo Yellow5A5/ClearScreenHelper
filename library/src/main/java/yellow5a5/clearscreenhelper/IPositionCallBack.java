@@ -5,4 +5,10 @@ package yellow5a5.clearscreenhelper;
  */
 
 public interface IPositionCallBack {
+
+    void onPositionChange(int offsetX, int offsetY);
+
+    void onClearEnd();
+
+    void onRecovery();
 }
