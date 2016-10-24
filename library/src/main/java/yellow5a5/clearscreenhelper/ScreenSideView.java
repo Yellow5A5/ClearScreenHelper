@@ -15,10 +15,9 @@ import android.widget.LinearLayout;
 
 public class ScreenSideView extends LinearLayout {
 
-    private final int MIN_SCROLL_SIZE = 130;
-    private final int LEFT_SIDE_X = MIN_SCROLL_SIZE;
-    private final int RIGHT_SIDE_X = getResources().getDisplayMetrics().widthPixels - MIN_SCROLL_SIZE;
-
+    private final int MIN_SCROLL_SIZE = 30;
+    private final int LEFT_SIDE_X = 0;
+    private final int RIGHT_SIDE_X = getResources().getDisplayMetrics().widthPixels;
 
     private int mDownX;
     private int mEndX;
@@ -49,7 +48,7 @@ public class ScreenSideView extends LinearLayout {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 float factor = (float) valueAnimator.getAnimatedValue();
-                int diffX = mEndX - (mDownX - MIN_SCROLL_SIZE);
+                int diffX = mEndX - mDownX;
                 Log.e(ScreenSideView.class.getName(), "onAnimationUpdate: " + (mDownX + diffX * factor));
                 mIPositionCallBack.onPositionChange((int) (mDownX + diffX * factor), 0);
             }
@@ -85,19 +84,29 @@ public class ScreenSideView extends LinearLayout {
                     return true;
                 }
             case MotionEvent.ACTION_MOVE:
+                Log.e(ScreenSideView.class.getName(), "onTouchEvent: " + (x));
                 if (isGreaterThanMinSize(x) && isCanSrcoll) {
-                    mIPositionCallBack.onPositionChange(x - MIN_SCROLL_SIZE, 0);
+                    mIPositionCallBack.onPositionChange(getRealTimeX(x), 0);
                     return true;
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                if (isCanSrcoll) {
-                    mDownX = x;
+                if (isGreaterThanMinSize(x) && isCanSrcoll) {
+                    mDownX = getRealTimeX(x);
                     fixPostion();
                     mEndAnimator.start();
                 }
         }
         return super.onTouchEvent(event);
+    }
+
+    private int getRealTimeX(int x) {
+        if (mOrientation.equals(Constants.Orientation.LEFT) && mDownX > RIGHT_SIDE_X / 3
+                || mOrientation.equals(Constants.Orientation.RIGHT) && (mDownX > RIGHT_SIDE_X * 2 / 3)) {
+            return x + MIN_SCROLL_SIZE;
+        } else {
+            return x - MIN_SCROLL_SIZE;
+        }
     }
 
     private void fixPostion() {
@@ -114,8 +123,8 @@ public class ScreenSideView extends LinearLayout {
     }
 
     public boolean isScrollFromSide(int x) {
-        if (x <= LEFT_SIDE_X && mOrientation.equals(Constants.Orientation.LEFT)
-                || (x > RIGHT_SIDE_X && mOrientation.equals(Constants.Orientation.RIGHT))) {
+        if (x <= LEFT_SIDE_X + MIN_SCROLL_SIZE && mOrientation.equals(Constants.Orientation.LEFT)
+                || (x > RIGHT_SIDE_X - MIN_SCROLL_SIZE && mOrientation.equals(Constants.Orientation.RIGHT))) {
             return true;
         } else {
             return false;

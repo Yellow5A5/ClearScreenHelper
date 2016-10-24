@@ -18,21 +18,29 @@ public class CleanScreenHelper {
     private Context mContext;
     private ViewGroup mDecorView;
 
-    private ScreenSideView mScreenSideView;
+    private View mScreenSideView;
     private LinkedList<View> mClearList;
 
     public CleanScreenHelper(Context context) {
-        initView(context);
+        this(context, null);
+    }
+
+    public CleanScreenHelper(Context context, ViewGroup rootView) {
+        initView(context, rootView);
         initPara();
         initCallback();
     }
 
-    private void initView(Context context) {
+    private void initView(Context context, ViewGroup root) {
         mDecorView = (ViewGroup) ((Activity) context).getWindow().getDecorView();
-        final ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        mScreenSideView = new ScreenSideView(context);
-        mDecorView.addView(mScreenSideView, params);
+        if (root == null) {
+            final ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            mScreenSideView = new ScreenSideView(context);
+            mDecorView.addView(mScreenSideView, params);
+        }else {
+            mScreenSideView = root;
+        }
     }
 
     private void initPara() {
@@ -82,7 +90,7 @@ public class CleanScreenHelper {
         }
     }
 
-    public void unbindAllCell(){
+    public void unbindAllCell() {
         mClearList.clear();
     }
 }
