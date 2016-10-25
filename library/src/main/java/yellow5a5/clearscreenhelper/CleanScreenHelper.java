@@ -3,11 +3,14 @@ package yellow5a5.clearscreenhelper;
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.LinkedList;
+
+import yellow5a5.clearscreenhelper.View.ScreenSideView;
 
 /**
  * Created by Yellow5A5 on 16/10/21.
@@ -18,34 +21,38 @@ public class CleanScreenHelper {
     private Context mContext;
     private ViewGroup mDecorView;
 
-    private View mScreenSideView;
+    private IClearRootView mScreenSideView;
     private LinkedList<View> mClearList;
 
     public CleanScreenHelper(Context context) {
         this(context, null);
     }
 
-    public CleanScreenHelper(Context context, ViewGroup rootView) {
+    public CleanScreenHelper(Context context, IClearRootView rootView) {
         initView(context, rootView);
         initPara();
         initCallback();
     }
 
-    private void initView(Context context, ViewGroup root) {
-        mDecorView = (ViewGroup) ((Activity) context).getWindow().getDecorView();
+    private void initView(Context context, IClearRootView root) {
         if (root == null) {
+            mDecorView = (ViewGroup) ((Activity) context).getWindow().getDecorView();
             final ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             mScreenSideView = new ScreenSideView(context);
-            mDecorView.addView(mScreenSideView, params);
-        }else {
+            mDecorView.addView((View) mScreenSideView, params);
+        } else {
             mScreenSideView = root;
+            View imgV = new View(context);
+            imgV.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            imgV.setClickable(true);
+            root.addView(imgV, -1);
         }
     }
 
     private void initPara() {
         mClearList = new LinkedList<>();
-        setOrentation(Constants.Orientation.LEFT);
+        setOrientation(Constants.Orientation.LEFT);
     }
 
     private void initCallback() {
@@ -70,7 +77,7 @@ public class CleanScreenHelper {
         });
     }
 
-    public void setOrentation(Constants.Orientation orientation) {
+    public void setOrientation(Constants.Orientation orientation) {
         mScreenSideView.setClearSide(orientation);
     }
 

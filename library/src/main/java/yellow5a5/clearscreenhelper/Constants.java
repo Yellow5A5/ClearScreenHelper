@@ -9,7 +9,7 @@ public class Constants {
     /**
      *  TODO add the mode of vertical.
      */
-    enum Orientation{
+    public enum Orientation{
         LEFT,RIGHT,TOP,BOTTOM;
     }
 

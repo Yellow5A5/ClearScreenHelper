@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<yellow5a5.clearscreenhelper.View.LinearRootView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_sample_fir"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:clickable="true"
     tools:context="yellow5a5.sample.SampleFirActivity">
 
     <TextView
-        android:textSize="30dp"
-        android:clickable="true"
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:clickable="true"
+        android:text="Hello World!"
+        android:textSize="30dp" />
 
     <TextView
         android:id="@+id/tv2"
@@ -47,10 +46,10 @@
         android:text="Hello World!" />
 
     <TextView
-        android:textSize="30sp"
         android:id="@+id/tv7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Hello World!"
+        android:textSize="30sp" />
 
-</LinearLayout>
+</yellow5a5.clearscreenhelper.View.LinearRootView>

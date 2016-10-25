@@ -10,13 +10,14 @@ import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
 import yellow5a5.clearscreenhelper.Constants;
+import yellow5a5.clearscreenhelper.IClearRootView;
 import yellow5a5.clearscreenhelper.IPositionCallBack;
 
 /**
  * Created by Yellow5A5 on 16/10/21.
  */
 
-public class ScreenSideView extends LinearLayout {
+public class ScreenSideView extends LinearLayout implements IClearRootView {
 
     private final int MIN_SCROLL_SIZE = 30;
     private final int LEFT_SIDE_X = 0;
@@ -32,6 +33,7 @@ public class ScreenSideView extends LinearLayout {
 
     private IPositionCallBack mIPositionCallBack;
 
+    @Override
     public void setIPositionCallBack(IPositionCallBack l) {
         mIPositionCallBack = l;
     }
@@ -72,7 +74,7 @@ public class ScreenSideView extends LinearLayout {
         });
     }
 
-
+    @Override
     public void setClearSide(Constants.Orientation orientation) {
         mOrientation = orientation;
     }
@@ -120,12 +122,12 @@ public class ScreenSideView extends LinearLayout {
         }
     }
 
-    public boolean isGreaterThanMinSize(int x) {
+    private boolean isGreaterThanMinSize(int x) {
         int absX = Math.abs(mDownX - x);
         return absX > MIN_SCROLL_SIZE;
     }
 
-    public boolean isScrollFromSide(int x) {
+    private boolean isScrollFromSide(int x) {
         if (x <= LEFT_SIDE_X + MIN_SCROLL_SIZE && mOrientation.equals(Constants.Orientation.LEFT)
                 || (x > RIGHT_SIDE_X - MIN_SCROLL_SIZE && mOrientation.equals(Constants.Orientation.RIGHT))) {
             return true;

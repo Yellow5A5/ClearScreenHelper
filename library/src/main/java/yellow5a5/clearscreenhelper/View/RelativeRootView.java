@@ -5,4 +5,5 @@ package yellow5a5.clearscreenhelper.View;
  */
 
 public class RelativeRootView {
+
 }
