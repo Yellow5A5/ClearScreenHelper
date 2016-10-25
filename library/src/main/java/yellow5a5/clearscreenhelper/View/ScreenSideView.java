@@ -1,4 +1,4 @@
-package yellow5a5.clearscreenhelper;
+package yellow5a5.clearscreenhelper.View;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -8,6 +8,9 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
+
+import yellow5a5.clearscreenhelper.Constants;
+import yellow5a5.clearscreenhelper.IPositionCallBack;
 
 /**
  * Created by Yellow5A5 on 16/10/21.
