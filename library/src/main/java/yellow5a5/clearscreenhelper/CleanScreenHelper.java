@@ -21,6 +21,7 @@ public class CleanScreenHelper {
 
     private LinkedList<View> mClearList;
 
+    @Deprecated
     public CleanScreenHelper(Context context) {
         this(context, null);
     }

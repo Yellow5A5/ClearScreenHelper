@@ -1,55 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<yellow5a5.clearscreenhelper.View.LinearRootView xmlns:android="http://schemas.android.com/apk/res/android"
+<yellow5a5.clearscreenhelper.View.RelativeRootView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_sample_fir"
+    android:id="@+id/sample_clear_root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="yellow5a5.sample.SampleFirActivity">
 
     <TextView
-        android:id="@+id/tv1"
+        android:id="@+id/sample_person_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
+        android:layout_margin="15dp"
+        android:text="name: actor"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/sample_person_fans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sample_person_info"
+        android:layout_marginLeft="15dp"
+        android:text="Fans: 0.0"
+        android:textColor="#ff00ff"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/sample_left_bottom_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="10dp"
+        android:text="  A  " />
+
+    <Button
+        android:id="@+id/sample_center_btn"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="CleanScreenHelper Demo." />
+
+    <TextView
+        android:id="@+id/sample_text_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sample_center_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="You can clear me by [CleanScreenHelper.bind(...)] " />
+
+
+    <Button
+        android:id="@+id/sample_right_bottom_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:text="  B  " />
+
+    <TextView
+        android:id="@+id/sample_right_top_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
         android:text="Hello World!"
-        android:textSize="30dp" />
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv2"
+    <Button
+        android:id="@+id/sample_bind_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_below="@id/sample_text_show"
+        android:layout_centerHorizontal="true"
+        android:text="Bind the center view." />
 
-    <TextView
-        android:id="@+id/tv3"
+
+    <Button
+        android:id="@+id/sample_unbind_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_below="@id/sample_bind_btn"
+        android:layout_centerHorizontal="true"
+        android:text="unbind the center view." />
 
-    <TextView
-        android:id="@+id/tv4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <TextView
-        android:id="@+id/tv5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <TextView
-        android:id="@+id/tv6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <TextView
-        android:id="@+id/tv7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:textSize="30sp" />
-
-</yellow5a5.clearscreenhelper.View.LinearRootView>
+</yellow5a5.clearscreenhelper.View.RelativeRootView>
