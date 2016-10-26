@@ -7,10 +7,15 @@ package yellow5a5.clearscreenhelper;
 public class Constants {
 
     /**
-     *  TODO add the mode of vertical.
+     * TODO
+     * Add the clear-mode of vertical if we need.
      */
-    public enum Orientation{
-        LEFT,RIGHT,TOP,BOTTOM;
+    public enum ClearMode {
+        LANDSCAPE, PORTRAIT
+    }
+
+    public enum Orientation {
+        LEFT, RIGHT, TOP, BOTTOM
     }
 
 }

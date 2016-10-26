@@ -5,7 +5,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.LinkedList;
@@ -18,16 +17,19 @@ import yellow5a5.clearscreenhelper.View.ScreenSideView;
 
 public class CleanScreenHelper {
 
-    private Context mContext;
-    private ViewGroup mDecorView;
-
     private IClearRootView mScreenSideView;
+
     private LinkedList<View> mClearList;
 
     public CleanScreenHelper(Context context) {
         this(context, null);
     }
 
+    /**
+     * Recomment
+     * @param context
+     * @param rootView
+     */
     public CleanScreenHelper(Context context, IClearRootView rootView) {
         initView(context, rootView);
         initPara();
@@ -36,11 +38,11 @@ public class CleanScreenHelper {
 
     private void initView(Context context, IClearRootView root) {
         if (root == null) {
-            mDecorView = (ViewGroup) ((Activity) context).getWindow().getDecorView();
+            ViewGroup decorView = (ViewGroup) ((Activity) context).getWindow().getDecorView();
             final ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             mScreenSideView = new ScreenSideView(context);
-            mDecorView.addView((View) mScreenSideView, params);
+            decorView.addView((View) mScreenSideView, params);
         } else {
             mScreenSideView = root;
             View imgV = new View(context);
@@ -52,7 +54,7 @@ public class CleanScreenHelper {
 
     private void initPara() {
         mClearList = new LinkedList<>();
-        setOrientation(Constants.Orientation.LEFT);
+        setOrientation(Constants.Orientation.RIGHT);
     }
 
     private void initCallback() {

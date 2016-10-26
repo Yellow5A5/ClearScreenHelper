@@ -61,12 +61,12 @@ public class ScreenSideView extends LinearLayout implements IClearRootView {
         mEndAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                if (mOrientation.equals(Constants.Orientation.LEFT) && mEndX == RIGHT_SIDE_X) {
+                if (mOrientation.equals(Constants.Orientation.RIGHT) && mEndX == RIGHT_SIDE_X) {
                     mIPositionCallBack.onClearEnd();
-                    mOrientation = Constants.Orientation.RIGHT;
-                } else if (mOrientation.equals(Constants.Orientation.RIGHT) && mEndX == LEFT_SIDE_X) {
-                    mIPositionCallBack.onRecovery();
                     mOrientation = Constants.Orientation.LEFT;
+                } else if (mOrientation.equals(Constants.Orientation.LEFT) && mEndX == LEFT_SIDE_X) {
+                    mIPositionCallBack.onRecovery();
+                    mOrientation = Constants.Orientation.RIGHT;
                 }
                 mDownX = mEndX;
                 isCanSrcoll = false;
@@ -106,8 +106,8 @@ public class ScreenSideView extends LinearLayout implements IClearRootView {
     }
 
     private int getRealTimeX(int x) {
-        if (mOrientation.equals(Constants.Orientation.LEFT) && mDownX > RIGHT_SIDE_X / 3
-                || mOrientation.equals(Constants.Orientation.RIGHT) && (mDownX > RIGHT_SIDE_X * 2 / 3)) {
+        if (mOrientation.equals(Constants.Orientation.RIGHT) && mDownX > RIGHT_SIDE_X / 3
+                || mOrientation.equals(Constants.Orientation.LEFT) && (mDownX > RIGHT_SIDE_X * 2 / 3)) {
             return x + MIN_SCROLL_SIZE;
         } else {
             return x - MIN_SCROLL_SIZE;
@@ -115,9 +115,9 @@ public class ScreenSideView extends LinearLayout implements IClearRootView {
     }
 
     private void fixPostion() {
-        if (mOrientation.equals(Constants.Orientation.LEFT) && mDownX > RIGHT_SIDE_X / 3) {
+        if (mOrientation.equals(Constants.Orientation.RIGHT) && mDownX > RIGHT_SIDE_X / 3) {
             mEndX = RIGHT_SIDE_X;
-        } else if (mOrientation.equals(Constants.Orientation.RIGHT) && (mDownX < RIGHT_SIDE_X * 2 / 3)) {
+        } else if (mOrientation.equals(Constants.Orientation.LEFT) && (mDownX < RIGHT_SIDE_X * 2 / 3)) {
             mEndX = LEFT_SIDE_X;
         }
     }
@@ -128,8 +128,8 @@ public class ScreenSideView extends LinearLayout implements IClearRootView {
     }
 
     private boolean isScrollFromSide(int x) {
-        if (x <= LEFT_SIDE_X + MIN_SCROLL_SIZE && mOrientation.equals(Constants.Orientation.LEFT)
-                || (x > RIGHT_SIDE_X - MIN_SCROLL_SIZE && mOrientation.equals(Constants.Orientation.RIGHT))) {
+        if (x <= LEFT_SIDE_X + MIN_SCROLL_SIZE && mOrientation.equals(Constants.Orientation.RIGHT)
+                || (x > RIGHT_SIDE_X - MIN_SCROLL_SIZE && mOrientation.equals(Constants.Orientation.LEFT))) {
             return true;
         } else {
             return false;

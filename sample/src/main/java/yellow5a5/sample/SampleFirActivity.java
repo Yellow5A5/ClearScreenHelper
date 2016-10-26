@@ -10,6 +10,7 @@ import android.widget.TextView;
 import yellow5a5.clearscreenhelper.CleanScreenHelper;
 import yellow5a5.clearscreenhelper.IClearRootView;
 import yellow5a5.clearscreenhelper.View.LinearRootView;
+import yellow5a5.clearscreenhelper.View.RelativeRootView;
 
 public class SampleFirActivity extends AppCompatActivity {
 
@@ -46,15 +47,7 @@ public class SampleFirActivity extends AppCompatActivity {
         tv1 = (TextView) findViewById(R.id.tv1);
         mCleanScreenHelper.bind(tv1);
         mCleanScreenHelper.bind(tv2);
-        mCleanScreenHelper.bind(tv3,tv4,tv5);
-        
-        
-        tv7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.e(SampleFirActivity.class.getName(), "onClick: ");
-            }
-        });
+        mCleanScreenHelper.bind(tv3, tv4, tv5);
     }
 
     private void initPara() {
