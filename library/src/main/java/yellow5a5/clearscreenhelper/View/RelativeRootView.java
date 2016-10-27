@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.widget.RelativeLayout;
 
 import yellow5a5.clearscreenhelper.Constants;
+import yellow5a5.clearscreenhelper.IClearEvent;
 import yellow5a5.clearscreenhelper.IClearRootView;
 import yellow5a5.clearscreenhelper.IPositionCallBack;
 
@@ -31,10 +32,16 @@ public class RelativeRootView extends RelativeLayout implements IClearRootView{
     private Constants.Orientation mOrientation;
 
     private IPositionCallBack mIPositionCallBack;
+    private IClearEvent mIClearEvent;
 
     @Override
     public void setIPositionCallBack(IPositionCallBack l) {
         mIPositionCallBack = l;
+    }
+
+    @Override
+    public void setIClearEvent(IClearEvent l) {
+        mIClearEvent = l;
     }
 
     public RelativeRootView(Context context) {
@@ -60,10 +67,10 @@ public class RelativeRootView extends RelativeLayout implements IClearRootView{
             @Override
             public void onAnimationEnd(Animator animation) {
                 if (mOrientation.equals(Constants.Orientation.RIGHT) && mEndX == RIGHT_SIDE_X) {
-                    mIPositionCallBack.onClearEnd();
+                    mIClearEvent.onClearEnd();
                     mOrientation = Constants.Orientation.LEFT;
                 } else if (mOrientation.equals(Constants.Orientation.LEFT) && mEndX == LEFT_SIDE_X) {
-                    mIPositionCallBack.onRecovery();
+                    mIClearEvent.onRecovery();
                     mOrientation = Constants.Orientation.RIGHT;
                 }
                 mDownX = mEndX;

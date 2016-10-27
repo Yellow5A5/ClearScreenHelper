@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import yellow5a5.clearscreenhelper.CleanScreenHelper;
+import yellow5a5.clearscreenhelper.IClearEvent;
 import yellow5a5.clearscreenhelper.IClearRootView;
 import yellow5a5.clearscreenhelper.View.RelativeRootView;
 
@@ -29,7 +30,32 @@ public class SampleFirActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample_fir);
-        this.mClearRootLayout = (RelativeRootView) findViewById(R.id.sample_clear_root_layout);
+
+        initView();
+        initListener();
+
+        /**
+         *  CleanScreenHelper API Usage:
+         */
+
+        mClearRootLayout = (RelativeRootView) findViewById(R.id.sample_clear_root_layout);
+        mCleanScreenHelper = new CleanScreenHelper(this, mClearRootLayout);
+        mCleanScreenHelper.bind(mLeftBottomBtn, mRightBottomBtn, mRightTopTextV, mFansTextV, mInfoTextV);
+        mCleanScreenHelper.setIClearEvent(new IClearEvent() {
+            @Override
+            public void onClearEnd() {
+                Toast.makeText(SampleFirActivity.this, "Clear End...", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onRecovery() {
+                Toast.makeText(SampleFirActivity.this, "Recovery Now...", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void initView() {
         this.mBindBtn = (Button) findViewById(R.id.sample_bind_btn);
         this.mUnBindBtn = (Button) findViewById(R.id.sample_unbind_btn);
         this.mLeftBottomBtn = (Button) findViewById(R.id.sample_left_bottom_btn);
@@ -39,13 +65,6 @@ public class SampleFirActivity extends AppCompatActivity {
         this.mFansTextV = (TextView) findViewById(R.id.sample_person_fans);
         this.mShowTextV = (TextView) findViewById(R.id.sample_text_show);
         this.mInfoTextV = (TextView) findViewById(R.id.sample_person_info);
-        mCleanScreenHelper = new CleanScreenHelper(this, mClearRootLayout);
-        initView();
-        initListener();
-    }
-
-    private void initView() {
-        mCleanScreenHelper.bind(mLeftBottomBtn, mRightBottomBtn, mRightTopTextV, mFansTextV, mInfoTextV);
     }
 
     private void initListener() {

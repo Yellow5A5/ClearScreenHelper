@@ -12,5 +12,7 @@ public interface IClearRootView {
 
     void setIPositionCallBack(IPositionCallBack l);
 
+    void setIClearEvent(IClearEvent l);
+
     void addView(View child, int index);
 }

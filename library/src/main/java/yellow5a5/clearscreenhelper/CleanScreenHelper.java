@@ -3,6 +3,7 @@ package yellow5a5.clearscreenhelper;
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -20,6 +21,8 @@ public class CleanScreenHelper {
     private IClearRootView mScreenSideView;
 
     private LinkedList<View> mClearList;
+    
+    private IClearEvent mIClearEvent;
 
     @Deprecated
     public CleanScreenHelper(Context context) {
@@ -67,17 +70,29 @@ public class CleanScreenHelper {
                     mClearList.get(i).setTranslationY(offsetY);
                 }
             }
-
+        });
+        
+        mScreenSideView.setIClearEvent(new IClearEvent() {
             @Override
             public void onClearEnd() {
-
+                Log.e(CleanScreenHelper.class.getName(), "onClearEnd: ");
+                if (mIClearEvent != null){
+                    mIClearEvent.onClearEnd();
+                }
             }
 
             @Override
             public void onRecovery() {
-
+                Log.e(CleanScreenHelper.class.getName(), "onRecovery: ");
+                if (mIClearEvent != null){
+                    mIClearEvent.onRecovery();
+                }
             }
         });
+    }
+    
+    public void setIClearEvent(IClearEvent l){
+        mIClearEvent = l;
     }
 
     public void setOrientation(Constants.Orientation orientation) {

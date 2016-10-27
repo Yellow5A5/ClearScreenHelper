@@ -8,7 +8,4 @@ public interface IPositionCallBack {
 
     void onPositionChange(int offsetX, int offsetY);
 
-    void onClearEnd();
-
-    void onRecovery();
 }
