@@ -37,7 +37,6 @@ public class SampleFirActivity extends AppCompatActivity {
         /**
          *  CleanScreenHelper API Usage:
          */
-
         mClearRootLayout = (RelativeRootView) findViewById(R.id.sample_clear_root_layout);
         mCleanScreenHelper = new CleanScreenHelper(this, mClearRootLayout);
         mCleanScreenHelper.bind(mLeftBottomBtn, mRightBottomBtn, mRightTopTextV, mFansTextV, mInfoTextV);

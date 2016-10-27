@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
@@ -61,7 +60,6 @@ public class ScreenSideView extends LinearLayout implements IClearRootView {
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 float factor = (float) valueAnimator.getAnimatedValue();
                 int diffX = mEndX - mDownX;
-                Log.e(ScreenSideView.class.getName(), "onAnimationUpdate: " + (mDownX + diffX * factor));
                 mIPositionCallBack.onPositionChange((int) (mDownX + diffX * factor), 0);
             }
         });
@@ -96,7 +94,6 @@ public class ScreenSideView extends LinearLayout implements IClearRootView {
                     return true;
                 }
             case MotionEvent.ACTION_MOVE:
-                Log.e(ScreenSideView.class.getName(), "onTouchEvent: " + (x));
                 if (isGreaterThanMinSize(x) && isCanSrcoll) {
                     mIPositionCallBack.onPositionChange(getRealTimeX(x), 0);
                     return true;
