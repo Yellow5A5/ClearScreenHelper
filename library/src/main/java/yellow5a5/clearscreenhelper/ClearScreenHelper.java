@@ -15,7 +15,7 @@ import yellow5a5.clearscreenhelper.View.ScreenSideView;
  * Created by Yellow5A5 on 16/10/21.
  */
 
-public class CleanScreenHelper {
+public class ClearScreenHelper {
 
     private IClearRootView mScreenSideView;
 
@@ -24,7 +24,7 @@ public class CleanScreenHelper {
     private IClearEvent mIClearEvent;
 
     @Deprecated
-    public CleanScreenHelper(Context context) {
+    public ClearScreenHelper(Context context) {
         this(context, null);
     }
 
@@ -33,7 +33,7 @@ public class CleanScreenHelper {
      * @param context
      * @param rootView
      */
-    public CleanScreenHelper(Context context, IClearRootView rootView) {
+    public ClearScreenHelper(Context context, IClearRootView rootView) {
         initView(context, rootView);
         initPara();
         initCallback();

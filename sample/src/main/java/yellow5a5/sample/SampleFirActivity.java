@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import yellow5a5.clearscreenhelper.CleanScreenHelper;
+import yellow5a5.clearscreenhelper.ClearScreenHelper;
 import yellow5a5.clearscreenhelper.IClearEvent;
 import yellow5a5.clearscreenhelper.IClearRootView;
 import yellow5a5.clearscreenhelper.View.RelativeRootView;
@@ -15,7 +15,7 @@ import yellow5a5.clearscreenhelper.View.RelativeRootView;
 public class SampleFirActivity extends AppCompatActivity {
 
     private IClearRootView mClearRootLayout;
-    private CleanScreenHelper mCleanScreenHelper;
+    private ClearScreenHelper mClearScreenHelper;
     private Button mLeftBottomBtn;
     private Button mRightBottomBtn;
     private Button mCenterBtn;
@@ -35,12 +35,12 @@ public class SampleFirActivity extends AppCompatActivity {
         initListener();
 
         /**
-         *  CleanScreenHelper API Usage:
+         *  ClearScreenHelper API Usage:
          */
         mClearRootLayout = (RelativeRootView) findViewById(R.id.sample_clear_root_layout);
-        mCleanScreenHelper = new CleanScreenHelper(this, mClearRootLayout);
-        mCleanScreenHelper.bind(mLeftBottomBtn, mRightBottomBtn, mRightTopTextV, mFansTextV, mInfoTextV);
-        mCleanScreenHelper.setIClearEvent(new IClearEvent() {
+        mClearScreenHelper = new ClearScreenHelper(this, mClearRootLayout);
+        mClearScreenHelper.bind(mLeftBottomBtn, mRightBottomBtn, mRightTopTextV, mFansTextV, mInfoTextV);
+        mClearScreenHelper.setIClearEvent(new IClearEvent() {
             @Override
             public void onClearEnd() {
                 Toast.makeText(SampleFirActivity.this, "Clear End...", Toast.LENGTH_SHORT).show();
@@ -71,11 +71,11 @@ public class SampleFirActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (view.getId() == mBindBtn.getId()) {
-                    mCleanScreenHelper.bind(mShowTextV);
-                    mCleanScreenHelper.bind(mCenterBtn);
+                    mClearScreenHelper.bind(mShowTextV);
+                    mClearScreenHelper.bind(mCenterBtn);
                 } else if (view.getId() == mUnBindBtn.getId()) {
-                    mCleanScreenHelper.unbind(mShowTextV);
-                    mCleanScreenHelper.unbind(mCenterBtn);
+                    mClearScreenHelper.unbind(mShowTextV);
+                    mClearScreenHelper.unbind(mCenterBtn);
                 } else if (view.getId() == mCenterBtn.getId()) {
                     Toast.makeText(SampleFirActivity.this, "Triggers the click event.", Toast.LENGTH_SHORT).show();
                 }

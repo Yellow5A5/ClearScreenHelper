@@ -1,38 +1,39 @@
 # ClearScreenHelper
 
-［[中文](https://github.com/Yellow5A5/CleanScreenHelper/blob/master/README_CN.md)］［[English](#)］
+［[中文](#)］［[English](https://github.com/Yellow5A5/CleanScreenHelper/blob/master/README.md)］
 
-In the development of our daily, we may need to clean the UI from screen occasionally. The main way is through a Event of Button-Click, 
-but some application can clean the UI by sliding the screen. In my mind, cleaning the screen by sliding-mode will be more favored by the user. The ClearScreenHelper will make this feature easily to implement. I hope it will be helpful to you.
+在我们的日常开发中，偶尔会遇到清屏相关的需求（更多的是在视频类的App中）。一般主要的方式都是通过点击某个按钮后对部分UI进行隐藏，而淘宝直播都是通过手指滑动界面来实现清屏的，相比之下感觉后者这样的交互方式会更加友好。
 
-## Introduction
+针对类似淘宝直播的滑动清屏的方式，一般可以将这些需要被隐藏的功能按钮统一放在一层View上，然后直接操作最外层的View，就这样的方法而言，代码维护起来比较麻烦，另外对原来的界面改动会比较多。因此，为了解决这样类似的问题，在此实现了一个统一的解决工具ClearScreenHelper。
 
-ClearScreenHelper has the following advantages:
+## 介绍
 
-> * **Minimal changes to the original logical code**
-> * **Dynamic settings the UI which need to be removed**
-> * **Simple and Convenient in maintenance**
 
-Demo Show here:
+通过ClearScreenHelper进行滑动清屏功能实现有一下优点：
+
+> * **对原有的逻辑代码及界面文件改动极小**
+> * **通过对其内部的View进行绑定，动态设置需要移除的控件**
+> * **逻辑维护起来十分方便，几行代码完美解决问题**
+
+效果见下方右图：
 
 <img src="image/demo_image1.gif" width=300></img>
 <img src="image/demo_image2.gif" width=300></img>
 
-## Usage
+## 调用姿势(两种方式)
 
-### First Mode(Recomment)
+### 方式一［<font color="##669966">推荐</font>］ (替换你的顶层Layout)
 
-#### Step 1: replace outermost layout in xml
 
-| Original Layout | Replace To   | 
+#### 1、在XML中替换掉你的最外层Layout
+
+| 原始最外层Layout | 替换后Layout   | 
 | :------:   | :-----:  |
 | RelativeLayout | RelativeRootView |
 | LinearLayout| LinearRootView|
 | FrameLayout | FrameRootView|
 
-eg.
-
-* **Original Layout：**
+* **原始：**
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
@@ -53,7 +54,7 @@ eg.
         .......
 ```
 
-* **After Be Replaced：**
+* **更改后：**
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
@@ -74,16 +75,16 @@ eg.
         .......
 ```
 
+#### 2、在Java代码中进行初始化
 
 
-#### Step 2: Init in Java.
 
 ```java
 mClearRootLayout = (RelativeRootView) findViewById(R.id.sample_clear_root_layout);
 mClearScreenHelper = new ClearScreenHelper(this, mClearRootLayout);
 mClearScreenHelper.bind(mLeftBottomBtn, mRightBottomBtn, mRightTopTextV, mFansTextV, mInfoTextV);
 
-//Add the callback if you want.
+//（提供了清屏的回调，供需）
 mClearScreenHelper.setIClearEvent(new IClearEvent() {
     @Override
     public void onClearEnd() {
@@ -97,17 +98,14 @@ mClearScreenHelper.setIClearEvent(new IClearEvent() {
 });
 ```
 
+### 方式二［<font color="##669966">不建议，体验不佳</font>］ (直接在Java代码)
 
-### Second Mode（Not recommended for use.）
-
-* Not recommended for use beacause we must move from side of screen in this mode, and it will cover the event of touch. 
-
+* 必须从边缘开始滑动，切边缘位置的点击会被覆盖，故推荐使用方式一。
 
 ```java
 mClearScreenHelper = new ClearScreenHelper(this);
-mClearScreenHelper.bind(mLeftBottomBtn, mRightBottomBtn, mRightTopTextV, mFansTextV, mInfoTextV);
 
-//Add the callback if you want.
+//（提供了清屏的回调，供需）
 mClearScreenHelper.setIClearEvent(new IClearEvent() {
     @Override
     public void onClearEnd() {
@@ -120,7 +118,6 @@ mClearScreenHelper.setIClearEvent(new IClearEvent() {
     }
 }
 ```
-
 
 
 ## License
@@ -139,4 +136,3 @@ mClearScreenHelper.setIClearEvent(new IClearEvent() {
     See the License for the specific language governing permissions and
     limitations under the License.
  
-
