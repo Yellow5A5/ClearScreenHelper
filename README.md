@@ -1,15 +1,36 @@
 # ClearScreenHelper
 
-［[中文](https://github.com/Yellow5A5/CleanScreenHelper/blob/master/README_CN.md)］［[English](#)］
+［[中文](https://github.com/Yellow5A5/ClearScreenHelper/blob/master/README_CN.md)］［[English](#)］
 
-In the development of our daily, we may need to clean the UI from screen occasionally. The main way is through a Event of Button-Click, 
+In our daily work, we may need to clean the UI from screen occasionally. The main way is through a Event of Button-Click, 
 but some application can clean the UI by sliding the screen. In my mind, cleaning the screen by sliding-mode will be more favored by the user. The ClearScreenHelper will make this feature easily to implement. I hope it will be helpful to you.
+
+## Import
+
+Step 1. Add the JitPack repository to your build file
+
+```
+	allprojects {
+		repositories {
+			...
+			maven { url "https://jitpack.io" }
+		}
+	}
+```
+
+Step 2. Add the dependency
+
+```
+	dependencies {
+	        compile 'com.github.Yellow5A5:ClearScreenHelper:1.0.0'
+	}
+```
 
 ## Introduction
 
 ClearScreenHelper has the following advantages:
 
-> * **Minimal changes to the original logical code**
+> * **Minimal changes to the original code**
 > * **Dynamic settings the UI which need to be removed**
 > * **Simple and Convenient in maintenance**
 

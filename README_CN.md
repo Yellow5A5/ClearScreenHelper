@@ -1,10 +1,31 @@
 # ClearScreenHelper
 
-［[中文](#)］［[English](https://github.com/Yellow5A5/CleanScreenHelper/blob/master/README.md)］
+［[中文](#)］［[English](https://github.com/Yellow5A5/ClearScreenHelper/blob/master/README.md)］
 
 在我们的日常开发中，偶尔会遇到清屏相关的需求（更多的是在视频类的App中）。一般主要的方式都是通过点击某个按钮后对部分UI进行隐藏，而淘宝直播都是通过手指滑动界面来实现清屏的，相比之下感觉后者这样的交互方式会更加友好。
 
 针对类似淘宝直播的滑动清屏的方式，一般可以将这些需要被隐藏的功能按钮统一放在一层View上，然后直接操作最外层的View，就这样的方法而言，代码维护起来比较麻烦，另外对原来的界面改动会比较多。因此，为了解决这样类似的问题，在此实现了一个统一的解决工具ClearScreenHelper。
+
+## 引入
+
+第一步：
+
+```
+	allprojects {
+		repositories {
+			...
+			maven { url "https://jitpack.io" }
+		}
+	}
+```
+
+第二步：
+
+```
+	dependencies {
+	        compile 'com.github.Yellow5A5:ClearScreenHelper:1.0.0'
+	}
+```
 
 ## 介绍
 
@@ -25,7 +46,7 @@
 ### 方式一［<font color="##669966">推荐</font>］ (替换你的顶层Layout)
 
 
-#### 1、在XML中替换掉你的最外层Layout
+#### 步骤1、在XML中替换掉你的最外层Layout
 
 | 原始最外层Layout | 替换后Layout   | 
 | :------:   | :-----:  |
@@ -75,7 +96,7 @@
         .......
 ```
 
-#### 2、在Java代码中进行初始化
+#### 步骤2、在Java代码中进行初始化
 
 
 
@@ -98,12 +119,15 @@ mClearScreenHelper.setIClearEvent(new IClearEvent() {
 });
 ```
 
+---
+
 ### 方式二［<font color="##669966">不建议，体验不佳</font>］ (直接在Java代码)
 
 * 必须从边缘开始滑动，切边缘位置的点击会被覆盖，故推荐使用方式一。
 
 ```java
 mClearScreenHelper = new ClearScreenHelper(this);
+mClearScreenHelper.bind(mLeftBottomBtn, mRightBottomBtn, mRightTopTextV, mFansTextV, mInfoTextV);
 
 //（提供了清屏的回调，供需）
 mClearScreenHelper.setIClearEvent(new IClearEvent() {
