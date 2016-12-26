@@ -23,7 +23,7 @@
 
 ```
 	dependencies {
-	        compile 'com.github.Yellow5A5:ClearScreenHelper:1.0.0'
+	        compile 'com.github.Yellow5A5:ClearScreenHelper:1.0.1'
 	}
 ```
 
