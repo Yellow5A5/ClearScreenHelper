@@ -51,7 +51,7 @@ public class ClearScreenHelper {
             View imgV = new View(context);
             imgV.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             imgV.setClickable(true);
-            root.addView(imgV, -1);
+            root.addView(imgV, 0);
         }
     }
 
