@@ -29,6 +29,7 @@ public class LinearRootView extends LinearLayout implements IClearRootView {
     private ValueAnimator mEndAnimator;
 
     private boolean isCanSrcoll;
+    private boolean isTouchWithAnimRuning;
 
     private Constants.Orientation mOrientation;
 
@@ -89,19 +90,21 @@ public class LinearRootView extends LinearLayout implements IClearRootView {
     public boolean onTouchEvent(MotionEvent event) {
         final int x = (int) event.getX();
         int offsetX = x - mDownX;
-        switch (event.getAction()) {
+        switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_MOVE:
                 if (isGreaterThanMinSize(mDownX, x) && isCanSrcoll) {
                     mIPositionCallBack.onPositionChange(getPositionChangeX(offsetX), 0);
                     return true;
                 }
                 break;
+            case MotionEvent.ACTION_POINTER_DOWN:
             case MotionEvent.ACTION_UP:
                 if (isGreaterThanMinSize(mDownX, x) && isCanSrcoll) {
                     mDownX = getPositionChangeX(offsetX);
                     fixPostion(offsetX);
                     mEndAnimator.start();
                 }
+                break;
         }
         return super.onTouchEvent(event);
     }
@@ -109,12 +112,13 @@ public class LinearRootView extends LinearLayout implements IClearRootView {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         final int x = (int) event.getX();
-        switch (event.getAction()) {
+        switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
+                isTouchWithAnimRuning = mEndAnimator.isRunning();
                 mDownX = x;
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (isGreaterThanMinSize(mDownX, x)) {
+                if (isGreaterThanMinSize(mDownX, x) && !isTouchWithAnimRuning) {
                     isCanSrcoll = true;
                     return true;
                 }
@@ -147,5 +151,5 @@ public class LinearRootView extends LinearLayout implements IClearRootView {
             return x1 - x2 > MIN_SCROLL_SIZE;
         }
     }
-
 }
+
